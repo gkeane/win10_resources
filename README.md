@@ -93,6 +93,50 @@ The script includes:
 - Detailed logging of all operations
 - 30-day cooldown period to prevent excessive scanning
 
+### PowerShell Scripts
+
+#### RegChange_Updates_From_MS.ps1
+This script resets and reconfigures Windows Update settings to ensure updates are received directly from Microsoft, and sets policies for Windows 11 24H2 targeting. It also adjusts power settings to prevent standby on AC power.
+
+**What it does:**
+- Stops the Windows Update service (wuauserv)
+- Removes existing Windows Update Group Policy registry keys and cached policy data
+- Recreates and configures the Windows Update policy registry keys for direct updates from Microsoft
+- Sets Windows Update to target Windows 11 24H2
+- Configures Automatic Updates (AU) subkey with recommended settings
+- Restarts the Windows Update service
+- Adjusts power settings to prevent standby on AC and set standby on DC
+
+**Usage:**
+Run this script as an administrator in PowerShell. It is intended for use in environments where you need to reset Windows Update policies (e.g., after removing WSUS or other update management) and ensure the device is configured to receive updates directly from Microsoft, targeting Windows 11 24H2.
+
+Example:
+```
+powershell.exe -ExecutionPolicy Bypass -File .\RegChange_Updates_From_MS.ps1
+```
+
+#### Powershell_ExtendWinRE_or_CreateNew.ps1
+This script increases the size of the Windows Recovery Environment (WinRE) partition to enable servicing and updates. It is provided by Microsoft as part of KB5035679 guidance for WinRE update issues.
+
+- **Reference:** [Microsoft KB5035679 - Instructions to run a script to resize the recovery partition to install a WinRE update](https://support.microsoft.com/en-us/topic/kb5035679-instructions-to-run-a-script-to-resize-the-recovery-partition-to-install-a-winre-update-98502836-cb2c-4d9a-874c-23bcdf16cd45)
+
+**What it does:**
+- Checks WinRE status
+- Backs up the current WinRE partition
+- Resizes or creates a new WinRE partition as needed
+- Restores WinRE functionality
+- Logs all actions
+
+**Usage:**
+1. Open PowerShell as Administrator.
+2. Run the script with the required backup folder parameter:
+   ```
+   Powershell.exe -ExecutionPolicy Bypass -File .\Powershell_ExtendWinRE_or_CreateNew.ps1 -BackupFolder C:\WinRE_backup
+   ```
+3. Follow the instructions in the Microsoft article for prerequisites and post-steps.
+
+For full details, troubleshooting, and support, see the Microsoft article linked above.
+
 ## Usage
 
 ### SQL Queries

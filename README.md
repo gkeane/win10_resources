@@ -39,6 +39,15 @@ This custom inventory script returns the size (in MB) of the recovery partition 
 
 ### SQL Queries
 
+#### win10_green_with_small_recovery.sql
+This script returns Windows 10 systems that are marked as 'Capable' for upgrade (green) and have a recovery partition size (from the CI-Recovery_Partition_size custom inventory item) less than 2GB (2048 MB).
+
+**Usage:**
+1. Log into your KACE SMA web interface
+2. Navigate to the SQL Query tool
+3. Copy and paste this script
+4. Execute the query to get the results
+
 #### win10_green.sql
 This script identifies Windows 10 systems that are capable of being upgraded. It returns:
 - System name

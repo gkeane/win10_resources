@@ -1,0 +1,12 @@
+# Custom Inventory Script for Windows 24H2 RedReason
+# Purpose: Retrieves the RedReason value from the Windows registry that indicates why a system
+# is not ready for Windows 24H2 upgrade.
+# Implementation:
+# 1. Log into KACE SMA web interface
+# 2. Go to Inventory > Custom Inventory
+# 3. Create a new Custom Inventory item
+# 4. In the Custom Inventory Rule field, paste the following line:
+#    RegistryValueReturn(HKLM64\SOFTWARE\Microsoft\Windows NT\CurrentVersion\AppCompatFlags\TargetVersionUpgradeExperienceIndicators\GE24H2, RedReason, TEXT)
+# 5. Save and deploy to target machines
+
+RegistryValueReturn(HKLM64\SOFTWARE\Microsoft\Windows NT\CurrentVersion\AppCompatFlags\TargetVersionUpgradeExperienceIndicators\GE24H2, RedReason, TEXT)

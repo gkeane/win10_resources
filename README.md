@@ -8,6 +8,35 @@ These scripts help identify and categorize Windows 10 systems in your environmen
 
 ## Scripts
 
+### Custom Inventory Scripts
+
+#### CI-Upd-24H2_RedReason.kace
+This custom inventory script retrieves the RedReason value from the Windows registry, which indicates why a system is not ready for Windows 24H2 upgrade. This information is crucial for:
+- Identifying specific blockers preventing Windows 24H2 upgrade
+- Troubleshooting upgrade issues
+- Planning remediation steps for affected systems
+
+#### CI-Upd-24H2_upgEx.kace
+This custom inventory script retrieves the UpgEx (Upgrade Experience) value from the Windows registry, which provides information about the system's Windows 24H2 upgrade experience status. This helps:
+- Monitor upgrade readiness across the environment
+- Track upgrade experience indicators
+- Identify systems that may need additional attention
+
+#### CI-Recovery_Partition_size.kace
+This custom inventory script returns the size (in MB) of the recovery partition on a Windows system. It uses a PowerShell command to query partition information and is useful for:
+- Auditing recovery partition sizes across your environment
+- Identifying systems with missing or unusually sized recovery partitions
+
+**Implementation:**
+- In KACE SMA, go to Inventory > Custom Inventory
+- Create a new Custom Inventory item
+- In the Custom Inventory Rule field, paste the following:
+  ```
+  ShellCommandTextReturn(cmd /c powershell -EncodedCommand RwBIAHQALQBJQABQAGcAfABQAGkAdABpAG8AbgAgAC0AQwBPAHMAAGgALAAkAF8ALgBUAHkAcABlAC0AZQAgAFIAZQBjAG8AdgBlAHIAeQAgAHwAIABGAG8AcgBFAGEAYwBoAC0ATwBiAGoAZQBjAHQAIAB7ACAAJABfAC4AUwBpAHoAZQAgAC8AIAAxAE0AQgAgAH0A)
+  ```
+- Save and deploy to target machines
+- The script will return the recovery partition size in MB for each system
+
 ### SQL Queries
 
 #### win10_green.sql

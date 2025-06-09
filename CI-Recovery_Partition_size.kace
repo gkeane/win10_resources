@@ -1,0 +1,18 @@
+# Custom Inventory Script for Recovery Partition Size
+# Purpose: Returns the size (in MB) of the recovery partition on the system.
+# Implementation:
+# 1. Log into KACE SMA web interface
+# 2. Go to Inventory > Custom Inventory
+# 3. Create a new Custom Inventory item
+# 4. In the Custom Inventory Rule field, paste the following line:
+#    ShellCommandTextReturn(cmd /c powershell -EncodedCommand <encoded_command>)
+#    (Replace <encoded_command> with the actual encoded PowerShell command below)
+# 5. Save and deploy to target machines
+#
+# The PowerShell command (before encoding):
+#   Get-Partition | Where-Object { $_.Type -eq 'Recovery' } | ForEach-Object { $_.Size / 1MB }
+#
+# Example usage:
+#   ShellCommandTextReturn(cmd /c powershell -EncodedCommand RwB...)
+
+ShellCommandTextReturn(cmd /c powershell -EncodedCommand RwBlAHQALQBQAGEAcgB0AGkAdABpAG8AbgAgAHwAIABXAGgAZQByAGUALQBPAGIAagBlAGMAdAAgAHsAIAAkAF8ALgBUAHkAcABlACAALQBlAHEAIAAnAFIAZQBjAG8AdgBlAHIAeQAnACAAfQAgAHwAIABGAG8AcgBFAGEAYwBoAC0ATwBiAGoAZQBjAHQAIAB7ACAAJABfAC4AUwBpAHoAZQAgAC8AIAAxAE0AQgAgAH0A)
